@@ -1,0 +1,71 @@
+﻿@model CateringManagement.Models.Customer
+
+<figure class="row">
+    <p class="col-auto">
+        @{
+            if (Model.CustomerThumbnail?.Content != null)
+            {
+                string imageBase64 = Convert.ToBase64String(Model.CustomerThumbnail.Content);
+                string imageSrc = string.Format("data:" + Model.CustomerThumbnail.MimeType + ";base64,{0}", imageBase64);
+                <img src="@imageSrc" alt="Profile Picture of @Model.FullName" title="Profile Picture of @Model.FullName" class="img-fluid rounded" />
+            }
+            else
+            {
+                <img src="~/Images/unkown.jpg" style="max-height: 80px; max-width: 96px" class="img-fluid rounded" />
+            }
+        }
+    </p>
+    <figcaption class="col mt-3"><h3><text class="d-none d-sm-inline">Patient: </text>@Model.FullName</h3></figcaption>
+</figure>
+<div class="row">
+    <div class="col-6">
+        <dl class="row">
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => model.MiddleName)
+            </dd>
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-6">
+        <dl class="row">
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-md-4">
+                @Html.DisplayNameFor(model => model.CustomerCode)
+            </dt>
+            <dd class="col-md-8">
+                @Html.DisplayFor(model => model.CustomerCode)
+            </dd>
+        </dl>
+    </div>
+</div>

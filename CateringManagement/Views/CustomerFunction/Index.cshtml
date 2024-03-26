@@ -1,0 +1,169 @@
+﻿@model IEnumerable<CateringManagement.Models.Function>
+
+@{
+    CateringManagement.Models.Customer customer = (CateringManagement.Models.Customer)ViewBag.customer;
+    <partial name="_CustomerDetail" model="customer" />
+    ViewData["Title"] = ViewData["ControllerFriendlyName"];
+}
+
+<form asp-action="Index" method="get">
+    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+    <input type="hidden" name="CustomerID" value="@customer.ID" />
+    <div class="form-horizontal">
+        <button class="btn @ViewData["Filtering"]" type="button" data-bs-toggle="collapse" id="filterToggle" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+            Filter/Search @ViewData["numberFilters"]
+        </button><br />
+        <div class="collapse @ViewData["ShowFilter"]" id="collapseFilter">
+            <div class="card card-body bg-light">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Filter by Function Type:</label>
+                        @Html.DropDownList("FunctionTypeID", null, "All Types", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Search Function Name/Lobby Sign:</label>
+                        @Html.TextBox("SearchString", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-4 align-self-end">
+                        @* <input type="submit" name="actionButton" value="Filter" class="btn btn-outline-primary" />
+                        <a asp-action="Index" class="btn btn-outline-dark">Clear</a> *@
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Start Date:</label>
+                        @Html.TextBox("StartDate", @ViewData["StartDate"], new { @class = "form-control", type = "date" })
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">End Date:</label>
+                        @Html.TextBox("EndDate", @ViewData["EndDate"], new { @class = "form-control", type = "date" })
+                    </div>
+                    <div class="form-group col-md-4 align-self-end">
+                        <input type="submit" name="actionButton" value="Filter" class="btn btn-outline-primary" />
+                        <a asp-action="Index" class="btn btn-outline-dark" asp-route-CustomerID="@customer.ID">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table class="table">
+
+                <tr>
+                    <th>
+                        <input type="submit" name="actionButton" value="Function" class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" value="Type" class="btn btn-toolbar" />
+                    </th>
+                    <th>
+                        <input type="submit" name="actionButton" value="Guar. No." class="btn btn-link" />
+                    </th>
+                    <th>
+                        <input type="submit" value="Rooms Booked" class="btn btn-toolbar" />
+                    </th>
+                    <th>
+                        <a asp-controller="CustomerFunction" asp-action="Add"
+                           asp-route-CustomerID="@customer.ID" asp-route-CustomerName="@customer.FullName">
+                            <span class="btn btn-success" data-bs-toggle="tooltip"
+                                  title="Add Function"><strong>&#x271A; Add</strong></span>
+                        </a>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDateSummary) (@Html.DisplayFor(modelItem => item.DurationSummary))<br />
+                            @Html.DisplayFor(modelItem => item.Summary)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FunctionType.Name) <br />
+                            Est. Value: @Html.DisplayFor(modelItem => item.EstimatedValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GuaranteedNumber) <br />
+                            @{
+                                int fileCount = item.FunctionDocuments.Count;
+                                if (fileCount > 0)
+                                {
+                                    var firstFile = item.FunctionDocuments.FirstOrDefault(); ;
+                                    if (fileCount > 1)
+                                    {
+                                        <a class="" role="button" data-bs-toggle="collapse" href="#collapseDocs@(item.ID)" aria-expanded="false" aria-controls="collapseDocs@(item.ID)">
+                                            <span class="badge bg-info">@fileCount</span> Documents...
+                                        </a>
+                                        <div class="collapse" id="collapseDocs@(item.ID)">
+                                            @{
+                                                foreach (var d in item.FunctionDocuments)
+                                                {
+                                                    <a asp-controller="FunctionDocument" asp-action="Download" asp-route-id="@d.ID">@d.FileName</a> <br />
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="FunctionDocument" asp-action="Download" asp-route-id="@firstFile.ID">@firstFile.FileName</a>
+                                    }
+                                }
+                            }
+                        </td>
+                        <td>
+                            @{
+                                int roomCount = item.FunctionRooms.Count;
+                                if (roomCount > 0)
+                                {
+                                    string firstRoom = item.FunctionRooms.FirstOrDefault().Room.Summary;
+                                    if (roomCount > 1)
+                                    {
+                                        string roomList = "";
+                                        var c = item.FunctionRooms.ToList();
+                                        for (int i = 1; i < roomCount; i++)//Skip the first because we have it already
+                                        {
+                                            roomList += c[i].Room.Summary + " <br />";
+                                        }
+                                        <a class="" role="button" data-bs-toggle="collapse" href="#collapseRoom@(item.ID)"
+                                           aria-expanded="false" aria-controls="collapseRoom@(item.ID)">
+                                            @firstRoom <span class="badge bg-info">@roomCount</span>
+                                        </a>
+                                        <div class="collapse" id="collapseRoom@(item.ID)">
+                                            @Html.Raw(roomList)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        @firstRoom
+                                    }
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                               role="button" data-bs-toggle="tooltip" title="Edit @ViewData["ControllerFriendlyName"]">
+                                &#x270E;
+                            </a>
+                            <a asp-action="Remove" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                               role="button" data-bs-toggle="tooltip" title="Delete @ViewData["ControllerFriendlyName"]">
+                                &#x274C;
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <partial name="_PagingNavBar" />
+    <div>
+        <a asp-action="Edit" asp-controller="Customer" asp-route-id="@customer.ID">Edit @customer.FullName</a> |
+        <a href='@ViewData["returnURL"]'>Back to Customer List</a>;
+    </div>
+</form>
+
+@section Scripts {
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}
+

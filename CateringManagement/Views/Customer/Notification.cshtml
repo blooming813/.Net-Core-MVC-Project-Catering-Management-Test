@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Marketing Email";
+}
+
+<h1>Marketing Email</h1>
+
+<hr /> 
+<form asp-action="Notification">
+<div class="col-md-8">
+    <div class="row">
+        <div class="row flex-lg-row" style="flex-wrap: nowrap;">
+            <div class="form-group col-md-6">
+                <label class="control-label"> Choose Customers</label>
+                @Html.ListBox("availOptions", (MultiSelectList)ViewBag.availOpts, new { @size = 10, @class = "form-control" })
+            </div>
+            <div class="row form-group col-md-2 flex-lg-column" style="width: 70px; justify-content: center; ">
+                <button type="button" id="btnLeft" class="btn btn-success btn-sm" style="margin-bottom: 10px;">
+                    <strong>+</strong>
+                </button>
+                <button type="button" id="btnRight" class="btn btn-danger btn-sm">
+                    <strong>-</strong>
+                </button>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label"> Customer Selected</label>
+                @Html.ListBox("selectedOptions", (MultiSelectList)ViewBag.selOpts, new { @size = 10, @class = "form-control" })
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="text-danger">@ViewData["Message"]</div>
+            @* <hr /> *@
+            <input type="hidden" name="id" value="@ViewData["id"]" />
+            <input type="hidden" name="FullName" value="@ViewData["CustomerName"]" />
+            <div class="form-group">
+                <label for="Subject" class="control-label">Email Subject</label>
+                <input type="text" id="Subject" name="Subject" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="emailContent" class="control-label">Message Content</label>
+                <textarea id="emailContent" name="emailContent" rows="5" cols="40" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+            </div>
+
+        </div>
+    </div>
+</form>
+<div>
+    <partial name="_BackToList" />
+</div>
+@section Scripts {
+    <script src="~/js/multiselect.js"></script>
+}
+
+

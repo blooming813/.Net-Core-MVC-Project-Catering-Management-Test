@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CateringManagement.Models.Customer>
+
+<partial name="_ViewHeading" />
+
+<form asp-action="Index" method="get">
+    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+    <a asp-controller="Customer" asp-action="Notification" class="btn btn-sm btn-outline-success">
+        <strong>Send Marketing Email</strong>
+    </a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <input type="submit" name="actionButton" value="Customer" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Company Name" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Phone" class="btn btn-link" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Customer Code" class="btn btn-link" />
+                </th>
+                <th style="min-width:120px">
+                    <a asp-action="Create" class="btn btn-sm btn-outline-success"
+                       role="button" data-bs-toggle="tooltip" title="Create New @ViewData["ControllerFriendlyName"]">
+                        <strong>&#x270D; Create New</strong>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            if (item.CustomerThumbnail?.Content != null)
+                            {
+                                string imageBase64 = Convert.ToBase64String(item.CustomerThumbnail.Content);
+                                string imageSrc = string.Format("data:" + item.CustomerThumbnail.MimeType + ";base64,{0}", imageBase64);
+                                <img src="@imageSrc" alt="Profile Picture of @item.FullName" title="Profile Picture of @item.FullName" class="img-fluid rounded" />
+                            }
+                            else
+                            {
+                                <img src="~/Images/unkown.jpg" style="max-height: 80px; max-width: 96px" class="img-fluid rounded" />
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Summary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneFormatted)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerCode)
+                    </td>
+                    
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                           role="button" data-bs-toggle="tooltip" title="Edit @ViewData["ControllerFriendlyName"]">
+                            &#x270E;
+                        </a>
+                        <a asp-controller="CustomerFunction" asp-action="Index" asp-route-CustomerID="@item.ID" class="btn btn-sm btn-outline-primary"
+                           role="button" data-bs-toggle="tooltip" title="@ViewData["ControllerFriendlyName"] Details">
+                            &#x1F50E;
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                           role="button" data-bs-toggle="tooltip" title="Delete @ViewData["ControllerFriendlyName"]">
+                            &#x274C;
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_PagingNavBar" />
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}
