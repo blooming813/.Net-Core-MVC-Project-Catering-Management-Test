@@ -1,3 +1,6 @@
-# Catering Management Solution
+# [Catering Management Solution](https://cateringmanagementjkim200.azurewebsites.net/)
 
-<a>https://cateringmanagementjkim200.azurewebsites.net/</a>
+
+Use below info for enter the website
+- Email: admin@outlook.com
+- PW: Pa55w@rd
