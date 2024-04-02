@@ -24,6 +24,7 @@ View (Page): Based on UI and UX, we provided the most suitable and user-friendly
 - Sorting/Filtering
 - Login/Register
 - Send Email (Single, Many)
+- Published on Azure
 
 &nbsp;
 ![Screenshot 2024-04-02 130045](https://github.com/blooming813/.Net-Core-MVC-Project-Catering-Management-Project/assets/97579997/f3fcd142-1e50-484f-bd76-abb2d902eb2a)
