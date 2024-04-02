@@ -25,5 +25,7 @@ View (Page): Based on UI and UX, we provided the most suitable and user-friendly
 - Login/Register
 - Send Email (Single, Many)
 
+&nbsp;
 ![Screenshot 2024-04-02 130045](https://github.com/blooming813/.Net-Core-MVC-Project-Catering-Management-Project/assets/97579997/f3fcd142-1e50-484f-bd76-abb2d902eb2a)
+&nbsp;
 ![Screenshot 2024-04-02 130320](https://github.com/blooming813/.Net-Core-MVC-Project-Catering-Management-Project/assets/97579997/16004e92-1dec-4bfe-96a7-5d75089452a0)
