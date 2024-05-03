@@ -6,6 +6,13 @@ Use the following credentials to log in:
 - Email: admin@outlook.com
 - Password: Pa55w@rd
 
+## Program
+[![HTML5](https://img.shields.io/badge/-HTML5-F05032?style=for-the-badge&logo=html5&logoColor=ffffff)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=ffffff)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=ffffff)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![.NET](https://img.shields.io/badge/-.NET-512BD4?style=for-the-badge&logo=.net&logoColor=ffffff)](https://dotnet.microsoft.com/)
+[![SQL](https://img.shields.io/badge/-SQL-4479A1?style=for-the-badge&logo=sql&logoColor=ffffff)](https://www.microsoft.com/en-us/sql-server/sql-server-2019)
+[![MVC](https://img.shields.io/badge/-MVC-3776AB?style=for-the-badge&logo=.net&logoColor=ffffff)](https://dotnet.microsoft.com/apps/aspnet/mvc)
 
 ## Overview
 
