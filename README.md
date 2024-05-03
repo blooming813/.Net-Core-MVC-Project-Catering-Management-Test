@@ -11,7 +11,7 @@ Use the following credentials to log in:
 [![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=ffffff)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=ffffff)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![.NET](https://img.shields.io/badge/-.NET-512BD4?style=for-the-badge&logo=.net&logoColor=ffffff)](https://dotnet.microsoft.com/)
-[![SQL](https://img.shields.io/badge/-SQL-4479A1?style=for-the-badge&logo=sql&logoColor=ffffff)](https://www.microsoft.com/en-us/sql-server/sql-server-2019)
+[![SQLite](https://img.shields.io/badge/-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=ffffff)](https://www.sqlite.org/index.html)
 [![MVC](https://img.shields.io/badge/-MVC-3776AB?style=for-the-badge&logo=.net&logoColor=ffffff)](https://dotnet.microsoft.com/apps/aspnet/mvc)
 
 ## Overview
